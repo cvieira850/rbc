@@ -8,7 +8,6 @@ function App() {
   const getData = useCallback(async () => {
     const response = await api.get('cases');
     console.log(response.data);
-
     setData(response.data);
   }, []);
   return (
