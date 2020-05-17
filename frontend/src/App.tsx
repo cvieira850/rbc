@@ -1,15 +1,27 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 
 import './App.css';
 import api from './services/api';
 
 function App() {
-  const [data,setData] = useState({})
-  const getData = useCallback(async () => {
-    const response = await api.get('cases');
-    console.log(response.data);
-    setData(response.data);
-  }, []);
+  const [data,setData] = useState([]);
+
+  useEffect(()=> {
+    api.get('cases').then(response => {
+      setData(response.data.cases);
+
+    });
+
+  }, [,setData]);
+
+  const getData = useCallback(async (event) => {
+    event.preventDefault();
+    data.forEach(({ element }) => {
+      console.log(element);
+
+    });
+
+  }, [data]);
   return (
     <div className="App">
       <header className="App-header">
